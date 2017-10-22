@@ -12,6 +12,8 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var addView: UIView?
+    var mainView: UIView?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -22,8 +24,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window.rootViewController = UIViewController()
             window.makeKeyAndVisible()
         }
+        
+        let mainViewRect: CGRect = CGRect(x:0,y:0,width:500, height:800);
+        mainView = UIView(frame:mainViewRect)
+        mainView?.backgroundColor = UIColor.white
+        window?.addSubview(mainView!); // window is coming soon
+        
+        let btn:UIButton = UIButton(frame: CGRect(x: 100, y: 450, width: 200, height: 40))
+        btn.setTitle("Add", for: UIControlState.normal)
+        btn.backgroundColor = UIColor.brown
+        btn.addTarget(self, action:#selector(showAddView), for: .touchUpInside)
+        mainView?.addSubview(btn)
+
+        let addViewRect: CGRect = CGRect(x:0, y:0, width:500, height: 800);
+        addView = UIView(frame: addViewRect)
+        addView?.backgroundColor = UIColor.blue
+        addView?.isHidden = true
+        window?.addSubview(addView!)
+    
 
         return true
+    }
+    
+    func showAddView() {
+        addView?.isHidden = false
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
