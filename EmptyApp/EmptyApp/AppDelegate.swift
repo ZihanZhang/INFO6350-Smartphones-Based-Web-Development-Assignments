@@ -16,14 +16,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var mainView: UIView?
     var listView: UIView?
     var searchView: UIView?
+    var deleteView: UIView?
     
     var textField1: UITextField?
     var textField2: UITextField?
     var textField3: UITextField?
     var textField4: UITextField?
     var textField5: UITextField?
+    
+    var stextField: UITextField?
+    
+    var dtextField: UITextField?
+    
+    var itemslist:[UIView] = []
+    
+//    var itemslistlist:[UIView] = []
+//
+//    var itemssearchlist:[UIView] = []
 
-
+    var listTextView: UITextView?
+    
+    var searchTextView: UITextView?
+    
+    
 
 
 
@@ -64,7 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let deleteBtn:UIButton = UIButton(frame: CGRect(x: 100, y: 550, width: 200, height: 40))
         deleteBtn.setTitle("Delete", for: UIControlState.normal)
         deleteBtn.backgroundColor = UIColor.brown
-        deleteBtn.addTarget(self, action:#selector(showAddView), for: .touchUpInside)
+        deleteBtn.addTarget(self, action:#selector(showDeleteView), for: .touchUpInside)
         mainView?.addSubview(deleteBtn)
         
         let srect: CGRect = CGRect(x:100,y:15,width:200,height:50)
@@ -95,30 +110,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         mainView?.addSubview(tclabel)
 
         
-        var rm = 100
-        for i in store.items {
-            let nrect: CGRect = CGRect(x:25,y:rm,width:75,height:50)
-            let nlabel: UILabel = UILabel(frame: nrect)
-            nlabel.text = i.itemName
-            mainView?.addSubview(nlabel)
-            let prect: CGRect = CGRect(x:100,y:rm,width:50,height:50)
-            let plabel: UILabel = UILabel(frame: prect)
-            plabel.text = String(i.itemPrice)
-            mainView?.addSubview(plabel)
-            let drect: CGRect = CGRect(x:150,y:rm,width:100,height:50)
-            let dlabel: UILabel = UILabel(frame: drect)
-            dlabel.text = i.itemDescription
-            mainView?.addSubview(dlabel)
-            let crect: CGRect = CGRect(x:300,y:rm,width:100,height:50)
-            let clabel: UILabel = UILabel(frame: crect)
-            clabel.text = i.itemType.name
-            mainView?.addSubview(clabel)
-
-            rm = rm + 50
-
-        }
+        showList()
 
 
+        //Add view
         let addViewRect: CGRect = CGRect(x:0, y:0, width:500, height: 800);
         addView = UIView(frame: addViewRect)
         addView?.backgroundColor = UIColor.blue
@@ -186,7 +181,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         textField4?.borderStyle = UITextBorderStyle.line
         textField4?.autocapitalizationType = UITextAutocapitalizationType.words
         textField4?.clearButtonMode = .whileEditing
-        textField4?.placeholder = "Enter text"
+        textField4?.placeholder = "Zihan Store"
         textField4?.keyboardType = .default
         textField4?.returnKeyType = .done
         addView?.addSubview(textField4!)
@@ -220,12 +215,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         addButton.addTarget(self, action:#selector(addDoneView), for: .touchUpInside)
         addView?.addSubview(addButton)
         
-        let returnButton: UIButton = UIButton(frame: CGRect(x: 250, y: 450, width: 150, height: 40))
-        returnButton.setTitle("Return", for: UIControlState.normal)
-        returnButton.backgroundColor = UIColor.brown
-        returnButton.addTarget(self, action:#selector(hideAddView), for: .touchUpInside)
-        addView?.addSubview(returnButton)
+        let rAddButton: UIButton = UIButton(frame: CGRect(x: 250, y: 450, width: 150, height: 40))
+        rAddButton.setTitle("Return", for: UIControlState.normal)
+        rAddButton.backgroundColor = UIColor.brown
+        rAddButton.addTarget(self, action:#selector(hideAddView), for: .touchUpInside)
+        addView?.addSubview(rAddButton)
 
+        
+        //List View
         let listRect: CGRect = CGRect(x:0, y:0, width:500, height: 800);
         listView = UIView(frame: listRect)
         listView?.backgroundColor = UIColor.blue
@@ -239,33 +236,111 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         listButton.addTarget(self, action:#selector(hideListView), for: .touchUpInside)
         listView?.addSubview(listButton)
         
+        let ltextRect: CGRect = CGRect(x:50, y:50, width: 320, height: 350)
+        listTextView = UITextView(frame: ltextRect)
+        listTextView?.isEditable = false
+        listView?.addSubview(listTextView!)
+        
+
+        
+        
+        //Search View
         let searchRect: CGRect = CGRect(x:0, y:0, width:500, height: 800);
         searchView = UIView(frame: searchRect)
         searchView?.backgroundColor = UIColor.blue
         searchView?.isHidden = true
         window?.addSubview(searchView!)
         
-        let searchButton: UIButton = UIButton(frame: CGRect(x: 100, y: 450, width: 200, height: 40))
-        searchButton.setTitle("Return", for: UIControlState.normal)
+        let searchButton: UIButton = UIButton(frame: CGRect(x: 50, y: 550, width: 150, height: 40))
+        searchButton.setTitle("Search", for: UIControlState.normal)
         searchButton.backgroundColor = UIColor.brown
-        searchButton.addTarget(self, action:#selector(hideSearchView), for: .touchUpInside)
+        searchButton.addTarget(self, action:#selector(showSearchResultView), for: .touchUpInside)
         searchView?.addSubview(searchButton)
+        
+        let rSearchButton: UIButton = UIButton(frame: CGRect(x: 250, y: 550, width: 150, height: 40))
+        rSearchButton.setTitle("Return", for: UIControlState.normal)
+        rSearchButton.backgroundColor = UIColor.brown
+        rSearchButton.addTarget(self, action:#selector(hideSearchView), for: .touchUpInside)
+        searchView?.addSubview(rSearchButton)
 
-        let stextField = UITextField(frame: CGRect(x:125.0, y:350.0, width:200.0, height:30.0))
-        stextField.textAlignment = NSTextAlignment.center
-        stextField.textColor = UIColor.blue
-        stextField.backgroundColor = UIColor.white
-        stextField.borderStyle = UITextBorderStyle.line
-        stextField.autocapitalizationType = UITextAutocapitalizationType.words
-        stextField.clearButtonMode = .whileEditing
-        stextField.placeholder = "Enter text"
-        stextField.keyboardType = .default
-        stextField.returnKeyType = .done
-        searchView?.addSubview(stextField)
+        stextField = UITextField(frame: CGRect(x:125.0, y:450.0, width:200.0, height:30.0))
+        stextField?.textAlignment = NSTextAlignment.center
+        stextField?.textColor = UIColor.blue
+        stextField?.backgroundColor = UIColor.white
+        stextField?.borderStyle = UITextBorderStyle.line
+        stextField?.autocapitalizationType = UITextAutocapitalizationType.words
+        stextField?.clearButtonMode = .whileEditing
+        stextField?.placeholder = "Enter text"
+        stextField?.keyboardType = .default
+        stextField?.returnKeyType = .done
+        searchView?.addSubview(stextField!)
+        
+        let stextRect: CGRect = CGRect(x:50, y:50, width: 320, height: 350)
+        searchTextView = UITextView(frame: stextRect)
+        searchTextView?.isEditable = false
+        searchView?.addSubview(searchTextView!)
 
         
-
+        //Delete View
+        let deleteRect: CGRect = CGRect(x:0, y:0, width:500, height: 800);
+        deleteView = UIView(frame: deleteRect)
+        deleteView?.backgroundColor = UIColor.blue
+        deleteView?.isHidden = true
+        window?.addSubview(deleteView!)
+        
+        dtextField = UITextField(frame: CGRect(x:125.0, y:350.0, width:200.0, height:30.0))
+        dtextField?.textAlignment = NSTextAlignment.center
+        dtextField?.textColor = UIColor.blue
+        dtextField?.backgroundColor = UIColor.white
+        dtextField?.borderStyle = UITextBorderStyle.line
+        dtextField?.autocapitalizationType = UITextAutocapitalizationType.words
+        dtextField?.clearButtonMode = .whileEditing
+        dtextField?.placeholder = "Enter text"
+        dtextField?.keyboardType = .default
+        dtextField?.returnKeyType = .done
+        deleteView?.addSubview(dtextField!)
+        
+        let deleteButton: UIButton = UIButton(frame: CGRect(x: 50, y: 450, width: 150, height: 40))
+        deleteButton.setTitle("Delete", for: UIControlState.normal)
+        deleteButton.backgroundColor = UIColor.brown
+        deleteButton.addTarget(self, action:#selector(deleteDoneView), for: .touchUpInside)
+        deleteView?.addSubview(deleteButton)
+        
+        let rdeleteButton: UIButton = UIButton(frame: CGRect(x: 250, y: 450, width: 150, height: 40))
+        rdeleteButton.setTitle("Return", for: UIControlState.normal)
+        rdeleteButton.backgroundColor = UIColor.brown
+        rdeleteButton.addTarget(self, action:#selector(hideDeleteView), for: .touchUpInside)
+        deleteView?.addSubview(rdeleteButton)
+        
         return true
+    }
+    
+    func deleteDoneView() {
+        let name = dtextField?.text
+        for i in curPurchase.items {
+            if i.itemName == name {
+                let item = curPurchase.items.filter {$0.itemName == name}
+                curPurchase.items = curPurchase.items.filter {$0.itemName != name}
+                store.items = store.items + item
+                deleteView?.isHidden = true
+                hideList()
+                showList()
+                return
+            }
+        }
+        let alert = UIAlertView()
+        alert.title = "Alert"
+        alert.message = "No match item"
+        alert.addButton(withTitle: "Understood")
+        alert.show()
+    }
+    
+    func showDeleteView() {
+        deleteView?.isHidden = false
+    }
+    
+    func hideDeleteView() {
+        deleteView?.isHidden = true
     }
     
     func showSearchView() {
@@ -277,13 +352,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func showListView() {
-        var r = 0
+//        var r = 0
+//        for j in itemslistlist {
+//            j.removeFromSuperview()
+//        }
+        var result: String = ""
         for i in curPurchase.items {
-            let rect: CGRect = CGRect(x:25,y:r,width:100,height:50)
-            let label: UILabel = UILabel(frame: rect)
-            label.text = i.itemName
-            listView?.addSubview(label)
-            r = r + 50
+//            let rect: CGRect = CGRect(x:25,y:r,width:100,height:50)
+//            let label: UILabel = UILabel(frame: rect)
+//            label.text = i.itemName
+//            listView?.addSubview(label)
+//            itemslistlist.append(label)
+//            r = r + 50
+            result = result + "\n" + i.itemName
+            listTextView?.text = result
         }
         listView?.isHidden = false
     }
@@ -304,19 +386,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let itemName = textField1?.text
         let itemPrice = textField2?.text
         let itemDescription = textField3?.text
-        let itemStore = Store(address: "10 Summer St.", name: (textField4?.text)!, phone: "781-333-0074")
-        let itemCategory = Category(name: (textField5?.text)!)
+        let itemStore = textField4?.text
+        let itemCategory = textField5?.text
         var have = false
+        var item: Item?
         for i in store.items {
-            if itemName == i.itemName {
+            if itemName! == i.itemName && Int(itemPrice!)! == i.itemPrice && itemDescription! == i.itemDescription && itemStore == i.store.name && itemCategory == i.itemType.name{
                 have = true
+                item = i
             }
         }
         if have {
-            let item: Item = Item(itemName:itemName!, itemDescription: itemDescription!, itemPrice: Int(itemPrice!)!, itemType: itemCategory, store:itemStore)
             store.items = store.items.filter {$0.itemName != itemName}
-            curPurchase.items.append(item)
+            curPurchase.items.append(item!)
             addView?.isHidden = true
+            hideList()
+            showList()
         }
         else {
             let alert = UIAlertView()
@@ -326,6 +411,87 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             alert.show()
         }
         
+    }
+    
+    func showSearchResultView() {
+        let name = stextField?.text
+//        for j in itemssearchlist {
+//            j.removeFromSuperview()
+//        }
+        var result: String = ""
+        for i in store.items {
+            if i.itemName == name {
+//                let srnrect: CGRect = CGRect(x:100,y:50,width:200,height:50)
+//                let srnlabel: UILabel = UILabel(frame: srnrect)
+//                srnlabel.text = "Item Name: " + i.itemName
+//                srnlabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+//                searchView?.addSubview(srnlabel)
+//                itemssearchlist.append(srnlabel)
+                result = result + "Item Name: " + i.itemName + "\n"
+//                let srprect: CGRect = CGRect(x:100,y:100,width:200,height:50)
+//                let srplabel: UILabel = UILabel(frame: srprect)
+//                srplabel.text = "Item Price: " + String(i.itemPrice)
+//                srplabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+//                searchView?.addSubview(srplabel)
+//                itemssearchlist.append(srplabel)
+                result = result + "Item Price: " + String(i.itemPrice) + "\n"
+//                let srdrect: CGRect = CGRect(x:100,y:150,width:200,height:50)
+//                let srdlabel: UILabel = UILabel(frame: srdrect)
+//                srdlabel.text = "Item Description: " + i.itemDescription
+//                srdlabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+//                searchView?.addSubview(srdlabel)
+//                itemssearchlist.append(srdlabel)
+                result = result + "Item Description: " + i.itemDescription + "\n"
+//                let srcrect: CGRect = CGRect(x:100,y:200,width:200,height:50)
+//                let srclabel: UILabel = UILabel(frame: srcrect)
+//                srclabel.text = "Item Category: " + i.itemType.name
+//                srclabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+//                searchView?.addSubview(srclabel)
+//                itemssearchlist.append(srclabel)
+                result = result + "Item Category: " + i.itemType.name + "\n"
+                searchTextView?.text = result
+                return
+            }
+        }
+        let alert = UIAlertView()
+        alert.title = "Alert"
+        alert.message = "No match item"
+        alert.addButton(withTitle: "Understood")
+        alert.show()
+    }
+    
+    func showList() {
+        var rm = 100
+        for i in store.items {
+            let nrect: CGRect = CGRect(x:25,y:rm,width:75,height:50)
+            let nlabel: UILabel = UILabel(frame: nrect)
+            nlabel.text = i.itemName
+            itemslist.append(nlabel)
+            mainView?.addSubview(nlabel)
+            let prect: CGRect = CGRect(x:100,y:rm,width:50,height:50)
+            let plabel: UILabel = UILabel(frame: prect)
+            plabel.text = String(i.itemPrice)
+            itemslist.append(plabel)
+            mainView?.addSubview(plabel)
+            let drect: CGRect = CGRect(x:150,y:rm,width:100,height:50)
+            let dlabel: UILabel = UILabel(frame: drect)
+            dlabel.text = i.itemDescription
+            itemslist.append(dlabel)
+            mainView?.addSubview(dlabel)
+            let crect: CGRect = CGRect(x:300,y:rm,width:100,height:50)
+            let clabel: UILabel = UILabel(frame: crect)
+            clabel.text = i.itemType.name
+            itemslist.append(clabel)
+            mainView?.addSubview(clabel)
+            
+            rm = rm + 50
+        }
+    }
+    
+    func hideList() {
+        for i in itemslist {
+            i.removeFromSuperview()
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

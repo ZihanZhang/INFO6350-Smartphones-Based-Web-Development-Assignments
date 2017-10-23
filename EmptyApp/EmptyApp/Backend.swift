@@ -108,18 +108,18 @@ func Delete(name: String) {
 
 func begin() {
     let Fruit: Category = Category(name: "Fruit")
-    let newItem1: Item = Item(itemName:"Orange", itemDescription:"one fruit", itemPrice: 5, itemType: Fruit, store: store)
+    let newItem1: Item = Item(itemName:"Orange", itemDescription:"One Fruit", itemPrice: 5, itemType: Fruit, store: store)
     store.items.append(newItem1)
-    let newItem2: Item = Item(itemName:"Apple", itemDescription:"one fruit", itemPrice: 3, itemType: Fruit, store: store)
+    let newItem2: Item = Item(itemName:"Apple", itemDescription:"One Fruit", itemPrice: 3, itemType: Fruit, store: store)
     store.items.append(newItem2)
-    let newItem3: Item = Item(itemName:"Cherry", itemDescription:"one fruit", itemPrice: 1, itemType: Fruit, store: store)
+    let newItem3: Item = Item(itemName:"Cherry", itemDescription:"One Fruit", itemPrice: 1, itemType: Fruit, store: store)
     store.items.append(newItem3)
     let Meat: Category = Category(name: "Meat")
-    let newItem4: Item = Item(itemName:"Pork", itemDescription:"one meat", itemPrice: 10, itemType: Meat, store: store)
+    let newItem4: Item = Item(itemName:"Pork", itemDescription:"One Meat", itemPrice: 10, itemType: Meat, store: store)
     store.items.append(newItem4)
-    let newItem5: Item = Item(itemName:"Beef", itemDescription:"one meat", itemPrice: 10, itemType: Meat, store: store)
+    let newItem5: Item = Item(itemName:"Beef", itemDescription:"One Meat", itemPrice: 10, itemType: Meat, store: store)
     store.items.append(newItem5)
-    let newItem6: Item = Item(itemName:"Lamb", itemDescription:"one meat", itemPrice: 15, itemType: Meat, store: store)
+    let newItem6: Item = Item(itemName:"Lamb", itemDescription:"One Meat", itemPrice: 15, itemType: Meat, store: store)
     store.items.append(newItem6)
 
 }
