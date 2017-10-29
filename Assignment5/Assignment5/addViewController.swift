@@ -50,7 +50,7 @@ class addViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        textField2.keyboardType = UIKeyboardType.numberPad
         // Do any additional setup after loading the view.
     }
 
