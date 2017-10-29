@@ -10,8 +10,8 @@ import UIKit
 
 class deleteViewController: UIViewController {
     @IBOutlet weak var dtextField: UITextField!
-    var have = false
     @IBAction func DeleteItem(_ sender: UIButton) {
+        var have = false
         let name = dtextField?.text
         for i in curPurchase.items {
             if i.itemName == name {
@@ -22,6 +22,7 @@ class deleteViewController: UIViewController {
             }
         }
         if have {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "callForUpdate"), object: nil)
             let alert = UIAlertView()
             alert.title = "Alert"
             alert.message = "Delete Succeed"

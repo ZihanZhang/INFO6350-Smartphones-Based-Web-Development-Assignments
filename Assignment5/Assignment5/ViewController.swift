@@ -8,14 +8,33 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var AddBtn: UIButton!
     @IBOutlet weak var SearchBtn: UIButton!
     @IBOutlet weak var ListBtn: UIButton!
     @IBOutlet weak var DeleteBtn: UIButton!
+    @IBOutlet weak var listView: UITableView!
+    
+    @available(iOS 2.0, *)
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return store.items.count
+    }
+    
+    @available(iOS 2.0, *)
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
+        cell.textLabel?.text = store.items[indexPath.row].itemName + "                       " + String(store.items[indexPath.row].itemPrice) + "                  " + store.items[indexPath.row].itemDescription
+        
+        return cell
+    }
+    
+    @objc public func updateList() {
+        listView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateList), name: NSNotification.Name(rawValue: "callForUpdate"), object: nil)
         // Do any additional setup after loading the view, typically from a nib.
     }
 

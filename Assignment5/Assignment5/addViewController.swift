@@ -32,6 +32,7 @@ class addViewController: UIViewController {
         if have {
             store.items = store.items.filter {$0.itemName != itemName}
             curPurchase.items.append(item!)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "callForUpdate"), object: nil)
             let alert = UIAlertView()
             alert.title = "Alert"
             alert.message = "Add Succeed"
