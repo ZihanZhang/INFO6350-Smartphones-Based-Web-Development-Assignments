@@ -11,8 +11,7 @@ import UIKit
 class searchViewController: UIViewController {
     @IBOutlet weak var searchTextView: UITextView!
     @IBOutlet weak var stextField: UITextField!
-    
-    @IBAction func SearchItem(_ sender: UIButton) {
+    @IBAction func SearchItem(_ sender: UIBarButtonItem) {
         let name = stextField?.text
         print(name)
         var have = false
@@ -40,10 +39,11 @@ class searchViewController: UIViewController {
             alert.message = "No Item"
             alert.addButton(withTitle: "Understood")
             alert.show()
-
+            
         }
     }
-    override func viewDidLoad() {
+    
+        override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.

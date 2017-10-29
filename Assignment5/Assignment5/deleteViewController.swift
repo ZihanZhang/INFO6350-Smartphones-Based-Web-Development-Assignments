@@ -10,7 +10,9 @@ import UIKit
 
 class deleteViewController: UIViewController {
     @IBOutlet weak var dtextField: UITextField!
-    @IBAction func DeleteItem(_ sender: UIButton) {
+    
+    
+    @IBAction func DeleteItem(_ sender: UIBarButtonItem) {
         var have = false
         let name = dtextField?.text
         for i in curPurchase.items {
@@ -35,10 +37,10 @@ class deleteViewController: UIViewController {
             alert.message = "No match item"
             alert.addButton(withTitle: "Understood")
             alert.show()
-
+            
         }
     }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
 

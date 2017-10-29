@@ -14,8 +14,7 @@ class addViewController: UIViewController {
     @IBOutlet weak var textField1: UITextField!
     @IBOutlet weak var textField3: UITextField!
     @IBOutlet weak var textField2: UITextField!
-    
-    @IBAction func addItem(_ sender: UIButton) {
+    @IBAction func addItem(_ sender: UIBarButtonItem) {
         let itemName = textField1?.text
         let itemPrice = textField2?.text
         let itemDescription = textField3?.text
