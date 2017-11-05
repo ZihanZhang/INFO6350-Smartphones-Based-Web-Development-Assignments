@@ -20,7 +20,7 @@ class listViewController: UIViewController, UITableViewDelegate, UITableViewData
     @available(iOS 2.0, *)
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "listcell")
-        cell.textLabel?.text = curPurchase.items[indexPath.row].itemName
+        cell.textLabel?.text = curPurchase.items[indexPath.row].itemName + " " + String(curPurchase.items[indexPath.row].itemPrice) + " " + curPurchase.items[indexPath.row].itemDescription
         var image: UIImage = UIImage(named: curPurchase.items[indexPath.row].itemName + ".jpeg")!
         cell.imageView?.image = image
         return cell

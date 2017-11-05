@@ -21,6 +21,13 @@ class deleteViewController: UIViewController {
                 let item = curPurchase.items.filter {$0.itemName == name}
                 curPurchase.items = curPurchase.items.filter {$0.itemName != name}
                 store.items = store.items + item
+                if item[0].itemType.name == "Fruit" {
+                    Fruit.items.append(item[0])
+                }
+                else {
+                    Meat.items.append(item[0])
+                }
+                storeItems = [Fruit.items, Meat.items]
             }
         }
         if have {
