@@ -109,6 +109,7 @@ let Fruit: Category = Category(name: "Fruit")
 let Meat: Category = Category(name: "Meat")
 let sections = [Fruit, Meat]
 var storeItems = [Fruit.items, Meat.items]
+var addItemImage: [String: UIImage] = [:]
 
 func begin() {
     let newItem1: Item = Item(itemName:"Orange", itemDescription:"One Fruit", itemPrice: 5, itemType: Fruit, store: store)

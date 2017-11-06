@@ -17,7 +17,12 @@ class detailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        imageView.image = UIImage(named: (curItem?.itemName)! + ".jpeg")
+        if addItemImage.keys.contains((curItem?.itemName)!) {
+            imageView.image = addItemImage[(curItem?.itemName)!]
+        }
+        else {
+            imageView.image = UIImage(named: (curItem?.itemName)! + ".jpeg")
+        }
         result = result + "Item Name: " + (curItem?.itemName)! + "\n"
         result = result + "Item Price: " + String(describing: (curItem?.itemPrice)!) + "\n"
         result = result + "Item Description: " + (curItem?.itemDescription)! + "\n"

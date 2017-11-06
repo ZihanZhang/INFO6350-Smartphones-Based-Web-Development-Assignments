@@ -48,13 +48,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "storecell")
         if isSearching {
             cell.textLabel?.text = searchStoreItems[indexPath.section][indexPath.row].itemName
-            var image: UIImage = UIImage(named: searchStoreItems[indexPath.section][indexPath.row].itemName + ".jpeg")!
-            cell.imageView?.image = image
+            if addItemImage.keys.contains(searchStoreItems[indexPath.section][indexPath.row].itemName) {
+                cell.imageView?.image = addItemImage[searchStoreItems[indexPath.section][indexPath.row].itemName]
+            }
+            else {
+                var image: UIImage = UIImage(named: searchStoreItems[indexPath.section][indexPath.row].itemName + ".jpeg")!
+                cell.imageView?.image = image
+            }
         }
         else {
             cell.textLabel?.text = storeItems[indexPath.section][indexPath.row].itemName
-            var image: UIImage = UIImage(named: storeItems[indexPath.section][indexPath.row].itemName + ".jpeg")!
-            cell.imageView?.image = image
+            if addItemImage.keys.contains(storeItems[indexPath.section][indexPath.row].itemName) {
+                cell.imageView?.image = addItemImage[storeItems[indexPath.section][indexPath.row].itemName]
+            }
+            else {
+                var image: UIImage = UIImage(named: storeItems[indexPath.section][indexPath.row].itemName + ".jpeg")!
+                cell.imageView?.image = image
+            }
         }
         return cell
     }
@@ -103,7 +113,48 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             updateList()
         }
     }
-
-
+    @IBAction func deleteButton(_ sender: Any) {
+        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "deleteViewController") as? deleteViewController {
+            if let navigator = navigationController {
+                navigator.pushViewController(viewController, animated: true)
+            }
+        }
+    }
+    
+    
+    @IBAction func listButton(_ sender: Any) {
+        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "listViewController") as? listViewController {
+            if let navigator = navigationController {
+                navigator.pushViewController(viewController, animated: true)
+            }
+        }
+    }
+    
+    
+    @IBAction func searchButton(_ sender: Any) {
+        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "searchViewController") as? searchViewController {
+            if let navigator = navigationController {
+                navigator.pushViewController(viewController, animated: true)
+            }
+        }
+    }
+    
+    @IBAction func addButton(_ sender: Any) {
+        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "addViewController") as? addViewController {
+            if let navigator = navigationController {
+                navigator.pushViewController(viewController, animated: true)
+            }
+        }
+    }
+    
+    @IBAction func newItemButton(_ sender: Any) {
+        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "newItemViewController") as? newItemViewController {
+            if let navigator = navigationController {
+                navigator.pushViewController(viewController, animated: true)
+            }
+        }
+    }
+    
+    
 }
 

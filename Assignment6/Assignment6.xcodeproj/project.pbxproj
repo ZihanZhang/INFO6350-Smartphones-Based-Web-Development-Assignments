@@ -17,6 +17,7 @@
 		EA77746A1FA5D055001E86FB /* searchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7774691FA5D055001E86FB /* searchViewController.swift */; };
 		EA77746C1FA5DB04001E86FB /* listViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA77746B1FA5DB04001E86FB /* listViewController.swift */; };
 		EA77746E1FA5DBE2001E86FB /* deleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA77746D1FA5DBE2001E86FB /* deleteViewController.swift */; };
+		EA8D24661FAFDB4C007AB82D /* newItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8D24651FAFDB4C007AB82D /* newItemViewController.swift */; };
 		EA9A02AF1FA5BBBE00C45C43 /* addViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9A02AE1FA5BBBE00C45C43 /* addViewController.swift */; };
 		EAD7812A1FA557F100ADD940 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD781291FA557F100ADD940 /* AppDelegate.swift */; };
 		EAD7812C1FA557F100ADD940 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD7812B1FA557F100ADD940 /* ViewController.swift */; };
@@ -37,6 +38,7 @@
 		EA7774691FA5D055001E86FB /* searchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchViewController.swift; sourceTree = "<group>"; };
 		EA77746B1FA5DB04001E86FB /* listViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listViewController.swift; sourceTree = "<group>"; };
 		EA77746D1FA5DBE2001E86FB /* deleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deleteViewController.swift; sourceTree = "<group>"; };
+		EA8D24651FAFDB4C007AB82D /* newItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newItemViewController.swift; sourceTree = "<group>"; };
 		EA9A02AE1FA5BBBE00C45C43 /* addViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addViewController.swift; sourceTree = "<group>"; };
 		EAD781261FA557F100ADD940 /* Assignment6.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment6.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAD781291FA557F100ADD940 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				EAD781291FA557F100ADD940 /* AppDelegate.swift */,
 				EAD7812B1FA557F100ADD940 /* ViewController.swift */,
 				EAD7812D1FA557F100ADD940 /* Main.storyboard */,
+				EA8D24651FAFDB4C007AB82D /* newItemViewController.swift */,
 				EA77746D1FA5DBE2001E86FB /* deleteViewController.swift */,
 				EA77746B1FA5DB04001E86FB /* listViewController.swift */,
 				EA7774691FA5D055001E86FB /* searchViewController.swift */,
@@ -185,6 +188,7 @@
 				EA9A02AF1FA5BBBE00C45C43 /* addViewController.swift in Sources */,
 				EA77746C1FA5DB04001E86FB /* listViewController.swift in Sources */,
 				EAD7813C1FA59F9900ADD940 /* Backend.swift in Sources */,
+				EA8D24661FAFDB4C007AB82D /* newItemViewController.swift in Sources */,
 				EA1CCF8A1FAAF6A10077914B /* detailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
