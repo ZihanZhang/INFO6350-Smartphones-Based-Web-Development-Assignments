@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import CoreData
 
+//Core Data being managed in Backend.swift
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     @IBOutlet weak var AddBtn: UIButton!
     @IBOutlet weak var SearchBtn: UIButton!
@@ -108,9 +110,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        //Use core data to check if Meat and Fruit are the same
-        checkMeat(meat: Meat)
-        checkFruit(fruit: Fruit)
         searchFruit.items = []
         searchMeat.items = []
         if searchBar.text == nil || searchBar.text == "" {
@@ -144,5 +143,49 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             updateList()
         }
     }
+    
+//    func updataData() {
+//        guard let appDelegate =
+//            UIApplication.shared.delegate as? AppDelegate else {
+//                return
+//        }
+//
+//        let managedContext =
+//            appDelegate.persistentContainer.viewContext
+//
+//        let meatFetchRequest =
+//            NSFetchRequest<NSManagedObject>(entityName: "StoreItemMeatData")
+//
+//        let fruitFetchRequest =
+//            NSFetchRequest<NSManagedObject>(entityName: "StoreItemFruitData")
+//
+//        do {
+//            let meat = try managedContext.fetch(meatFetchRequest)
+//            let fruit = try managedContext.fetch(fruitFetchRequest)
+//
+//            print(meat.count)
+//            print(fruit.count)
+//
+//            var meats:[Item] = []
+//            var fruits:[Item] = []
+//
+//            for m in meat {
+//                let newItem = Item(itemName: m.value(forKeyPath: "name") as! String, itemDescription: m.value(forKeyPath: "idescription") as! String, itemPrice: m.value(forKeyPath: "price") as! Int, itemType: Meat, store: store)
+//                meats.append(newItem)
+//                print(newItem.itemName)
+//            }
+//
+//            for f in fruit {
+//                let newItem = Item(itemName: f.value(forKeyPath: "name") as! String, itemDescription: f.value(forKeyPath: "idescription") as! String, itemPrice: f.value(forKeyPath: "price") as! Int, itemType: Fruit, store: store)
+//                fruits.append(newItem)
+//                print(newItem.itemName)
+//            }
+//
+//            storeItems[0] = fruits
+//            storeItems[1] = meats
+//        } catch let error as NSError {
+//            print("Could not fetch. \(error), \(error.userInfo)")
+//        }
+//    }
 }
 

@@ -13,25 +13,25 @@ class deleteViewController: UIViewController {
     
     
     @IBAction func DeleteItem(_ sender: UIBarButtonItem) {
-        //Use core data to check if the data are the same
-        checkStore(store: store)
-        checkMeat(meat: Meat)
-        checkFruit(fruit: Fruit)
         var have = false
         let name = dtextField?.text
         for i in curPurchase.items {
             if i.itemName == name {
                 have = true
                 let item = curPurchase.items.filter {$0.itemName == name}
+                deletePurchaseItemData(item: item[0])
                 curPurchase.items = curPurchase.items.filter {$0.itemName != name}
                 store.items = store.items + item
                 if item[0].itemType.name == "Fruit" {
+                    saveStoreFruitItemData(item: item[0])
                     Fruit.items.append(item[0])
                 }
                 else {
+                    saveStoreMeatItemData(item: item[0])
                     Meat.items.append(item[0])
                 }
                 storeItems = [Fruit.items, Meat.items]
+                updataData()
             }
         }
         if have {

@@ -72,7 +72,7 @@ class Purchase {
 
 let store = Store(address: "10 Summer St.", name: "Zihan Store", phone: "781-333-0074")
 
-func saveStoreData(address: String, name: String, phone: String, items: [Item]) {
+func saveStoreMeatItemData(item: Item) {
     guard let appDelegate =
         UIApplication.shared.delegate as? AppDelegate else {
             return
@@ -82,17 +82,16 @@ func saveStoreData(address: String, name: String, phone: String, items: [Item]) 
         appDelegate.persistentContainer.viewContext
     
     let entity =
-        NSEntityDescription.entity(forEntityName: "StoreData",
+        NSEntityDescription.entity(forEntityName: "StoreItemMeatData",
                                    in: managedContext)!
     
-    let store = NSManagedObject(entity: entity,
+    let itemData = NSManagedObject(entity: entity,
                                  insertInto: managedContext)
-    
-    store.setValue(name, forKeyPath: "name")
-    store.setValue(address, forKeyPath: "address")
-    store.setValue(phone, forKeyPath: "phone")
-    store.setValue(items, forKeyPath: "items")
-    
+    itemData.setValue(item.itemName, forKeyPath: "name")
+    itemData.setValue(item.itemDescription, forKeyPath: "idescription")
+    itemData.setValue(item.itemPrice, forKeyPath: "price")
+
+
     do {
         try managedContext.save()
     } catch let error as NSError {
@@ -100,7 +99,7 @@ func saveStoreData(address: String, name: String, phone: String, items: [Item]) 
     }
 }
 
-func saveMeatData(name: String, items: [Item]) {
+func saveStoreFruitItemData(item: Item) {
     guard let appDelegate =
         UIApplication.shared.delegate as? AppDelegate else {
             return
@@ -110,65 +109,15 @@ func saveMeatData(name: String, items: [Item]) {
         appDelegate.persistentContainer.viewContext
     
     let entity =
-        NSEntityDescription.entity(forEntityName: "MeatData",
+        NSEntityDescription.entity(forEntityName: "StoreItemFruitData",
                                    in: managedContext)!
     
-    let store = NSManagedObject(entity: entity,
-                                insertInto: managedContext)
+    let itemData = NSManagedObject(entity: entity,
+                                   insertInto: managedContext)
+    itemData.setValue(item.itemName, forKeyPath: "name")
+    itemData.setValue(item.itemDescription, forKeyPath: "idescription")
+    itemData.setValue(item.itemPrice, forKeyPath: "price")
     
-    store.setValue(name, forKeyPath: "name")
-    store.setValue(items, forKeyPath: "items")
-    
-    do {
-        try managedContext.save()
-    } catch let error as NSError {
-        print("Could not save. \(error), \(error.userInfo)")
-    }
-}
-
-func saveFruitData(name: String, items: [Item]) {
-    guard let appDelegate =
-        UIApplication.shared.delegate as? AppDelegate else {
-            return
-    }
-    
-    let managedContext =
-        appDelegate.persistentContainer.viewContext
-    
-    let entity =
-        NSEntityDescription.entity(forEntityName: "FruitData",
-                                   in: managedContext)!
-    
-    let store = NSManagedObject(entity: entity,
-                                insertInto: managedContext)
-    
-    store.setValue(name, forKeyPath: "name")
-    store.setValue(items, forKeyPath: "items")
-    
-    do {
-        try managedContext.save()
-    } catch let error as NSError {
-        print("Could not save. \(error), \(error.userInfo)")
-    }
-}
-
-func savePurchaseData(items: [Item]) {
-    guard let appDelegate =
-        UIApplication.shared.delegate as? AppDelegate else {
-            return
-    }
-    
-    let managedContext =
-        appDelegate.persistentContainer.viewContext
-    
-    let entity =
-        NSEntityDescription.entity(forEntityName: "FruitData",
-                                   in: managedContext)!
-    
-    let store = NSManagedObject(entity: entity,
-                                insertInto: managedContext)
-    
-    store.setValue(items, forKeyPath: "items")
     
     do {
         try managedContext.save()
@@ -218,28 +167,68 @@ var storeItems = [Fruit.items, Meat.items]
 var addItemImage: [String: UIImage] = [:]
 
 func begin() {
+//    clearData()
+    guard let appDelegate =
+        UIApplication.shared.delegate as? AppDelegate else {
+            return
+    }
+
+    let managedContext =
+        appDelegate.persistentContainer.viewContext
+
+    let entity =
+        NSEntityDescription.entity(forEntityName: "Start",
+                                   in: managedContext)!
+
+    let startData = NSManagedObject(entity: entity,
+                                   insertInto: managedContext)
+
+    let startFetchRequest =
+        NSFetchRequest<NSManagedObject>(entityName: "Start")
+
+
+    do {
+        let start = try managedContext.fetch(startFetchRequest)
+        if start[0].value(forKeyPath: "startedbefore") as! Bool == true {
+            return
+        }
+        else {
+            startData.setValue(true, forKeyPath: "startedbefore")
+            try managedContext.save()
+        }
+    } catch let error as NSError {
+        print("Could not save. \(error), \(error.userInfo)")
+    }
+
+    clearData()
     let newItem1: Item = Item(itemName:"Orange", itemDescription:"One Fruit", itemPrice: 5, itemType: Fruit, store: store)
     Fruit.items.append(newItem1)
     store.items.append(newItem1)
+    saveStoreFruitItemData(item: newItem1)
     let newItem2: Item = Item(itemName:"Apple", itemDescription:"One Fruit", itemPrice: 3, itemType: Fruit, store: store)
     Fruit.items.append(newItem2)
     store.items.append(newItem2)
+    saveStoreFruitItemData(item: newItem2)
     let newItem3: Item = Item(itemName:"Cherry", itemDescription:"One Fruit", itemPrice: 1, itemType: Fruit, store: store)
     Fruit.items.append(newItem3)
     store.items.append(newItem3)
+    saveStoreFruitItemData(item: newItem3)
     let newItem4: Item = Item(itemName:"Pork", itemDescription:"One Meat", itemPrice: 10, itemType: Meat, store: store)
     Meat.items.append(newItem4)
     store.items.append(newItem4)
+    saveStoreMeatItemData(item: newItem4)
     let newItem5: Item = Item(itemName:"Beef", itemDescription:"One Meat", itemPrice: 10, itemType: Meat, store: store)
     Meat.items.append(newItem5)
     store.items.append(newItem5)
+    saveStoreMeatItemData(item: newItem5)
     let newItem6: Item = Item(itemName:"Lamb", itemDescription:"One Meat", itemPrice: 15, itemType: Meat, store: store)
     Meat.items.append(newItem6)
     store.items.append(newItem6)
-    saveStoreData(address: "10 Summer St.", name: "Zihan Store", phone: "781-333-0074", items: store.items)
+    saveStoreMeatItemData(item: newItem6)
+//    clearData()
 }
 
-func checkStore(store: Store) {
+func clearData() {
     guard let appDelegate =
         UIApplication.shared.delegate as? AppDelegate else {
             return
@@ -248,17 +237,37 @@ func checkStore(store: Store) {
     let managedContext =
         appDelegate.persistentContainer.viewContext
     
-    let fetchRequest =
-        NSFetchRequest<NSManagedObject>(entityName: "StoreData")
+    let meatFetchRequest =
+        NSFetchRequest<NSManagedObject>(entityName: "StoreItemMeatData")
+    
+    let fruitFetchRequest =
+        NSFetchRequest<NSManagedObject>(entityName: "StoreItemFruitData")
+    
+    let purchaseFetchRequest =
+        NSFetchRequest<NSManagedObject>(entityName: "PurchaseItemData")
     
     do {
-        let storeData = try managedContext.fetch(fetchRequest)
+        let meat = try managedContext.fetch(meatFetchRequest)
+        let fruit = try managedContext.fetch(fruitFetchRequest)
+        let purchase = try managedContext.fetch(purchaseFetchRequest)
+        
+        for p in purchase {
+            managedContext.delete(p)
+        }
+        
+        for m in meat {
+            managedContext.delete(m)
+        }
+        
+        for f in fruit {
+            managedContext.delete(f)
+        }
     } catch let error as NSError {
         print("Could not fetch. \(error), \(error.userInfo)")
     }
 }
 
-func checkMeat(meat: Category) {
+func updataData() {
     guard let appDelegate =
         UIApplication.shared.delegate as? AppDelegate else {
             return
@@ -267,17 +276,66 @@ func checkMeat(meat: Category) {
     let managedContext =
         appDelegate.persistentContainer.viewContext
     
-    let fetchRequest =
-        NSFetchRequest<NSManagedObject>(entityName: "MeatData")
+    let meatFetchRequest =
+        NSFetchRequest<NSManagedObject>(entityName: "StoreItemMeatData")
+    
+    let fruitFetchRequest =
+        NSFetchRequest<NSManagedObject>(entityName: "StoreItemFruitData")
+    
+    let purchaseFetchRequest =
+        NSFetchRequest<NSManagedObject>(entityName: "PurchaseItemData")
     
     do {
-        let storeData = try managedContext.fetch(fetchRequest)
+        let meat = try managedContext.fetch(meatFetchRequest)
+        let fruit = try managedContext.fetch(fruitFetchRequest)
+        
+        let purchase = try managedContext.fetch(purchaseFetchRequest)
+        
+        print(meat.count)
+        print(fruit.count)
+        
+        var meats:[Item] = []
+        var fruits:[Item] = []
+        var purchases:[Item] = []
+        
+        for p in purchase {
+            if p.value(forKeyPath: "icategory") as! String == "Meat" {
+                let newItem = Item(itemName: p.value(forKeyPath: "name") as! String, itemDescription: p.value(forKeyPath: "idescription") as! String, itemPrice: p.value(forKeyPath: "price") as! Int, itemType: Meat, store: store)
+                purchases.append(newItem)
+            }
+            else {
+                let newItem = Item(itemName: p.value(forKeyPath: "name") as! String, itemDescription: p.value(forKeyPath: "idescription") as! String, itemPrice: p.value(forKeyPath: "price") as! Int, itemType: Fruit, store: store)
+                purchases.append(newItem)
+            }
+        }
+        
+        for m in meat {
+            let newItem = Item(itemName: m.value(forKeyPath: "name") as! String, itemDescription: m.value(forKeyPath: "idescription") as! String, itemPrice: m.value(forKeyPath: "price") as! Int, itemType: Meat, store: store)
+            meats.append(newItem)
+            print(newItem.itemName)
+        }
+        
+        for f in fruit {
+            let newItem = Item(itemName: f.value(forKeyPath: "name") as! String, itemDescription: f.value(forKeyPath: "idescription") as! String, itemPrice: f.value(forKeyPath: "price") as! Int, itemType: Fruit, store: store)
+            fruits.append(newItem)
+            print(newItem.itemName)
+        }
+        
+        Meat.items = meats
+        Fruit.items = fruits
+        
+        storeItems[0] = fruits
+        print(storeItems[0].count)
+        storeItems[1] = meats
+        print(storeItems[1].count)
+        
+        curPurchase.items = purchases
     } catch let error as NSError {
         print("Could not fetch. \(error), \(error.userInfo)")
     }
 }
 
-func checkFruit(fruit: Category) {
+func deleteData(item: Item) {
     guard let appDelegate =
         UIApplication.shared.delegate as? AppDelegate else {
             return
@@ -286,17 +344,34 @@ func checkFruit(fruit: Category) {
     let managedContext =
         appDelegate.persistentContainer.viewContext
     
-    let fetchRequest =
-        NSFetchRequest<NSManagedObject>(entityName: "FruitData")
+    let meatFetchRequest =
+        NSFetchRequest<NSManagedObject>(entityName: "StoreItemMeatData")
+    meatFetchRequest.predicate = NSPredicate(format: "name == %@", item.itemName)
+    
+    let fruitFetchRequest =
+        NSFetchRequest<NSManagedObject>(entityName: "StoreItemFruitData")
+    fruitFetchRequest.predicate = NSPredicate(format: "name == %@", item.itemName)
     
     do {
-        let storeData = try managedContext.fetch(fetchRequest)
+        let meat = try managedContext.fetch(meatFetchRequest)
+        let fruit = try managedContext.fetch(fruitFetchRequest)
+        
+        if meat.count > 0 {
+            managedContext.delete(meat[0])
+        }
+        else if fruit.count > 0 {
+            managedContext.delete(fruit[0])
+        }
+        else {
+            return
+        }
+        
     } catch let error as NSError {
         print("Could not fetch. \(error), \(error.userInfo)")
     }
 }
 
-func checkPurchase(items: [Item]) {
+func savePurchaseItemData(item: Item) {
     guard let appDelegate =
         UIApplication.shared.delegate as? AppDelegate else {
             return
@@ -305,17 +380,46 @@ func checkPurchase(items: [Item]) {
     let managedContext =
         appDelegate.persistentContainer.viewContext
     
-    let fetchRequest =
-        NSFetchRequest<NSManagedObject>(entityName: "PurchaseData")
+    let entity =
+        NSEntityDescription.entity(forEntityName: "PurchaseItemData",
+                                   in: managedContext)!
+    
+    let itemData = NSManagedObject(entity: entity,
+                                   insertInto: managedContext)
+    itemData.setValue(item.itemName, forKeyPath: "name")
+    itemData.setValue(item.itemDescription, forKeyPath: "idescription")
+    itemData.setValue(item.itemPrice, forKeyPath: "price")
+    itemData.setValue(item.itemType.name, forKeyPath: "icategory")
+    
     
     do {
-        let storeData = try managedContext.fetch(fetchRequest)
+        try managedContext.save()
+    } catch let error as NSError {
+        print("Could not save. \(error), \(error.userInfo)")
+    }
+}
+
+func deletePurchaseItemData(item: Item) {
+    guard let appDelegate =
+        UIApplication.shared.delegate as? AppDelegate else {
+            return
+    }
+    
+    let managedContext =
+        appDelegate.persistentContainer.viewContext
+    
+    let purchaseFetchRequest =
+        NSFetchRequest<NSManagedObject>(entityName: "PurchaseItemData")
+    purchaseFetchRequest.predicate = NSPredicate(format: "name == %@", item.itemName)
+    
+    do {
+        let purchase = try managedContext.fetch(purchaseFetchRequest)
+        
+        managedContext.delete(purchase[0])
     } catch let error as NSError {
         print("Could not fetch. \(error), \(error.userInfo)")
     }
 }
-
-
 
 
 

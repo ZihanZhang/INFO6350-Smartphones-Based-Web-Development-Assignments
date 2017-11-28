@@ -19,10 +19,6 @@ class newItemViewController: UIViewController, UINavigationControllerDelegate, U
     var imageAdded = false
     
     @IBAction func createItem(_ sender: Any) {
-        //Use core data to check if the data are the same
-        checkStore(store: store)
-        checkMeat(meat: Meat)
-        checkFruit(fruit: Fruit)
         let itemName = textField1.text
         let itemPrice = textField2.text
         let itemDescription = textField3.text

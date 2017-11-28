@@ -14,7 +14,7 @@
 		EA5833921FCA4F91004B9896 /* Cherry.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EA58338C1FCA4F90004B9896 /* Cherry.jpeg */; };
 		EA5833931FCA4F91004B9896 /* Pork.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EA58338D1FCA4F90004B9896 /* Pork.jpeg */; };
 		EA5833941FCA4F91004B9896 /* Orange.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EA58338E1FCA4F90004B9896 /* Orange.jpeg */; };
-		EA5833DC1FCBC243004B9896 /* zihanModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EA5833DA1FCBC243004B9896 /* zihanModel.xcdatamodeld */; };
+		EA5833E21FCC18D6004B9896 /* zihanModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EA5833E01FCC18D6004B9896 /* zihanModel.xcdatamodeld */; };
 		EA77746A1FA5D055001E86FB /* searchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7774691FA5D055001E86FB /* searchViewController.swift */; };
 		EA77746C1FA5DB04001E86FB /* listViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA77746B1FA5DB04001E86FB /* listViewController.swift */; };
 		EA77746E1FA5DBE2001E86FB /* deleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA77746D1FA5DBE2001E86FB /* deleteViewController.swift */; };
@@ -36,7 +36,7 @@
 		EA58338C1FCA4F90004B9896 /* Cherry.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Cherry.jpeg; path = Assignment8/Cherry.jpeg; sourceTree = "<group>"; };
 		EA58338D1FCA4F90004B9896 /* Pork.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Pork.jpeg; path = Assignment8/Pork.jpeg; sourceTree = "<group>"; };
 		EA58338E1FCA4F90004B9896 /* Orange.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Orange.jpeg; path = Assignment8/Orange.jpeg; sourceTree = "<group>"; };
-		EA5833DB1FCBC243004B9896 /* zihanModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = zihanModel.xcdatamodel; sourceTree = "<group>"; };
+		EA5833E11FCC18D6004B9896 /* zihanModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = zihanModel.xcdatamodel; sourceTree = "<group>"; };
 		EA7774691FA5D055001E86FB /* searchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchViewController.swift; sourceTree = "<group>"; };
 		EA77746B1FA5DB04001E86FB /* listViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listViewController.swift; sourceTree = "<group>"; };
 		EA77746D1FA5DBE2001E86FB /* deleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deleteViewController.swift; sourceTree = "<group>"; };
@@ -66,7 +66,7 @@
 		EAD7811D1FA557F100ADD940 = {
 			isa = PBXGroup;
 			children = (
-				EA5833DA1FCBC243004B9896 /* zihanModel.xcdatamodeld */,
+				EA5833E01FCC18D6004B9896 /* zihanModel.xcdatamodeld */,
 				EA58338C1FCA4F90004B9896 /* Cherry.jpeg */,
 				EA58338A1FCA4F90004B9896 /* Apple.jpeg */,
 				EA58338E1FCA4F90004B9896 /* Orange.jpeg */,
@@ -186,7 +186,7 @@
 			files = (
 				EAD7812C1FA557F100ADD940 /* ViewController.swift in Sources */,
 				EA77746E1FA5DBE2001E86FB /* deleteViewController.swift in Sources */,
-				EA5833DC1FCBC243004B9896 /* zihanModel.xcdatamodeld in Sources */,
+				EA5833E21FCC18D6004B9896 /* zihanModel.xcdatamodeld in Sources */,
 				EA77746A1FA5D055001E86FB /* searchViewController.swift in Sources */,
 				EAD7812A1FA557F100ADD940 /* AppDelegate.swift in Sources */,
 				EA9A02AF1FA5BBBE00C45C43 /* addViewController.swift in Sources */,
@@ -378,12 +378,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		EA5833DA1FCBC243004B9896 /* zihanModel.xcdatamodeld */ = {
+		EA5833E01FCC18D6004B9896 /* zihanModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				EA5833DB1FCBC243004B9896 /* zihanModel.xcdatamodel */,
+				EA5833E11FCC18D6004B9896 /* zihanModel.xcdatamodel */,
 			);
-			currentVersion = EA5833DB1FCBC243004B9896 /* zihanModel.xcdatamodel */;
+			currentVersion = EA5833E11FCC18D6004B9896 /* zihanModel.xcdatamodel */;
 			path = zihanModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
